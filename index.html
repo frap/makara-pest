@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="./favicon.png">
+  
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.1/dist/leaflet.css"
+   integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14="
+   crossorigin=""/>
+  
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"
+   integrity="sha256-NDI0K41gVbWqfkkaHj15IzU7PtMoelkzyKp8TOaFQ3s="
+   crossorigin=""></script>
+  
+   <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <div class="loader">Loading...</div>
+  <div id="map"></div>
+  <table id="maptable" class="display"></table>
+
+  <script type="text/javascript">
+    var map = L.map('map', {
+      attributionControl: false,
+      zoomControl: false,
+      scrollWheelZoom: false,
+      tap: false
+    }).setView([-41.306,	174.704], 15); // default center is overridden by Google Sheet options and points
+    
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+    
+  </script>
+  
+  
+</body>
+</html>
