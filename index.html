@@ -40,14 +40,24 @@
     
    var openstreetmapUrl = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
     
+  var Thunderforest_OpenCycleMap = L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={apikey}', {
+	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	apikey: '14d1c23f2adc41828d0519f830365211',
+	maxZoom: 22
+  });
+
+    var Stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	subdomains: 'abcd',
+	minZoom: 0,
+	maxZoom: 18,
+	ext: 'png'
+});
     
-    var thunderUrl = 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}{r}.png?apikey=14d1c23f2adc41828d0519f830365211', 
-        thunderlayer = new L.TileLayer(thunderUrl, {maxZoom: 18});
-    
-    // add the layer to the map
-    map.addLayer(thunderlayer);
-    
-   </script>
+ // add the layer to the map
+  map.addLayer(Thunderforest_OpenCycleMap);
+  map.addLayer(Stamen_TerrainBackground);   
+ </script>
  
 </body>
 </html>
