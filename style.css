@@ -6,11 +6,7 @@ body {
   width: 100%;
 }
 
-#map {
-  width: 100vw;
-  height: 100vh;
-  visibility: hidden;
-}
+#map { height: 380px; }
 
 h3 {
   margin: 0;
