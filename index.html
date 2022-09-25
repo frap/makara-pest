@@ -40,10 +40,15 @@
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
-}).addTo(map);
+    }).addTo(map);
     
-  </script>
-  
-  
+    var thunderUrl = 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}{r}.png?apikey=<insert-your-apikey-here>',
+    thunderlayer = new L.TileLayer(thunderUrl, {maxZoom: 18});
+    
+    // add the layer to the map
+    map.addLayer(thunderlayer);
+    
+   </script>
+ 
 </body>
 </html>
