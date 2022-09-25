@@ -25,7 +25,7 @@
 
 <body>
 
-  <div class="loader">Loading...</div>
+ <!-- <div class="loader">Loading...</div> -->
   <div id="map"></div>
   <table id="maptable" class="display"></table>
 
@@ -37,10 +37,10 @@
       tap: false
     }).setView([-41.306,	174.704], 15); // default center is overridden by Google Sheet options and points
     
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+ <!--   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
-    }).addTo(map);
+    }).addTo(map); -->
     
     var thunderUrl = 'https://tile.thunderforest.com/cycle/{z}/{x}/{y}{r}.png?apikey=14d1c23f2adc41828d0519f830365211',
     thunderlayer = new L.TileLayer(thunderUrl, {maxZoom: 18});
