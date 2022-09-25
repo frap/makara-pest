@@ -30,12 +30,13 @@
   <table id="maptable" class="display"></table>
 
   <script type="text/javascript">
-    var map = L.map('map', {
-      attributionControl: false,
-      zoomControl: false,
-      scrollWheelZoom: false,
-      tap: false
-    }).setView(["-41.306",	"174.704"], 15); // default center is overridden by Google Sheet options and points
+    
+  // initialize the map on the "map" div with a given center and zoom
+   var map = new L.Map('map', {
+  center: new L.LatLng(-41.306, 174.704),
+  zoom: 15
+  });
+    
     
  <!--   L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
