@@ -7,7 +7,7 @@ var map = L.map('map', {
 });
 
 // Set the position and zoom level of the map for Makara Peak
-map.setView([-41.288, 174.707], 19);
+map.setView([-41.291046, 174.711845], 19);
 
 var makara = L.marker([ -41.28840228959656, 174.70725274159147],
   {alt: 'Makara Peak'}).addTo(map)
