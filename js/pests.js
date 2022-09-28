@@ -7,7 +7,11 @@ var map = L.map('map', {
 });
 
 // Set the position and zoom level of the map for Makara Peak
-map.setView([-41.295058, 174.710091], 12);
+map.setView([-41.288, 174.707], 12);
+
+var makara = L.marker([ -41.28840228959656, 174.70725274159147],
+  {alt: 'Makara Peak'}).addTo(map)
+    .bindPopup('Makara Peak, the start of all the fun!');
 
 /* Base Layers */
 var esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -58,4 +62,7 @@ var baseLayers = {
     "Statem Terrain": Statem_TerrainBackground
 };
 
-L.control.layers(baseLayers).addTo(map);
+// add the layer to the map
+map.addLayer(CyclOSM);
+
+//L.control.layers(baseLayers).addTo(map);
