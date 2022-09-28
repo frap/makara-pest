@@ -92,3 +92,87 @@ info.update = function (props) {
 			: 'Hover over a pest');
 };
 info.addTo(map);
+
+function getColor(d) {
+	return d > 99 ? '#0868ac' :
+			d > 49  ? '#2f8ec0' :
+			d > 29  ? '#55b0c8' :
+			d > 19   ? '#7bccc4' :
+			d > 9   ? '#a5dcbe' :
+			d > 3   ? '#ccebca' :
+						'#ccebca';
+}
+
+/* Set of function for the hover over the geojson layer */
+function style(feature) {
+	return {
+		weight: 2,
+		opacity: 0.7,
+		color: 'white',
+		dashArray: '2',
+		fillOpacity: 0.7,
+		fillColor: getColor(feature.properties.size_of_infestation_sqm)
+
+	};
+}
+
+function highlightFeature(e) {
+	var layer = e.target;
+
+	layer.setStyle({
+		weight: 5,
+		color: '#277FCA',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
+
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
+
+	info.update(layer.feature.properties);
+}
+
+var geojson;
+
+function resetHighlight(e) {
+	geojson.resetStyle(e.target);
+	info.update();
+}
+
+function zoomToFeature(e) {
+	map.fitBounds(e.target.getBounds());
+}
+
+function onEachFeature(feature, layer) {
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlight,
+		click: zoomToFeature
+	});
+}
+
+
+var legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+	var div = L.DomUtil.create('div', 'info legend'),
+		grades = [1, 9, 19, 30, 50, 100],
+		labels = [],
+		from, to;
+
+	for (var i = 0; i < grades.length; i++) {
+		from = grades[i];
+		to = grades[i + 1];
+
+		labels.push(
+			'<i style="background:' + getColor(from + 1) + '"></i> ' +
+			from + (to ? '&ndash;' + to : '+'));
+	}
+
+	div.innerHTML = labels.join('<br>');
+	return div;
+};
+
+legend.addTo(map);
