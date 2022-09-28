@@ -57,7 +57,7 @@ var baseLayers = {
 	  "ESRI World Imagery": esri_WorldImagery,
 	  "ESRI World Terrain": esri_WorldTerrain,
 	  "ESRI National Geographic": esri_NatGeoWorldMap,
-    "Cycle OSM" : CyclOSM,
+    "Cycle OSM": CyclOSM,
     "ThunderForest Cycle": Thunderforest_OpenCycleMap,
     "Statem Terrain": Statem_TerrainBackground
 };
