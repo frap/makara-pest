@@ -62,12 +62,41 @@ var baseLayers = {
     "Statem Terrain": stamen_TerrainBackground
 };
 
-// Add baseLayers to the map
-geojson = L.geoJson(states, {
-	style: style,
-	onEachFeature: onEachFeature
-}).addTo(map);
+function getColor(d) {
+	return d > 99 ? '#0868ac' :
+			d > 49  ? '#2f8ec0' :
+			d > 29  ? '#55b0c8' :
+			d > 19   ? '#7bccc4' :
+			d > 9   ? '#a5dcbe' :
+			d > 3   ? '#ccebca' :
+						'#ccebca';
+}
 
+
+/* Set of function for the hover over the geojson layer */
+function style(feature) {
+	  return {
+        radius: feature.properties.size_of_infestation_sqm
+		weight: 2,
+		opacity: 0.7,
+		color: 'white',
+		dashArray: '2',
+		fillOpacity: 0.7,
+		fillColor: getColor(feature.properties.size_of_infestation_sqm)
+
+	};
+}
+// Add baseLayers to the map
+// geojson = L.geoJson(states, {
+// 	style: style,
+// 	onEachFeature: onEachFeature
+// }).addTo(map);
+
+geojson = L.geoJSON(states, {
+    pointToLayer: function (feature, latlng) {
+        return L.circleMarker(latlng, style);
+    }
+}).addTo(map);
 var overLayers = {
 	"Leafy Pests":geojson
 }
@@ -88,33 +117,11 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
 		this._div.innerHTML = '<p><b>Pest</b></p>' +  (props ?
-			'<b>' + props.species + '</b><br />' + props.size_of_infestation_sqm + ' m<sup>2</sup>'
-			: 'Hover over a pest');
+			'<b>' + props.species + '</b><br />' + props.size_of_infestation_sqm + ' m<sup>2</sup> '
+			+ props.notes_and_recommendations : 'Hover over a pest');
 };
 info.addTo(map);
 
-function getColor(d) {
-	return d > 99 ? '#0868ac' :
-			d > 49  ? '#2f8ec0' :
-			d > 29  ? '#55b0c8' :
-			d > 19   ? '#7bccc4' :
-			d > 9   ? '#a5dcbe' :
-			d > 3   ? '#ccebca' :
-						'#ccebca';
-}
-
-/* Set of function for the hover over the geojson layer */
-function style(feature) {
-	return {
-		weight: 2,
-		opacity: 0.7,
-		color: 'white',
-		dashArray: '2',
-		fillOpacity: 0.7,
-		fillColor: getColor(feature.properties.size_of_infestation_sqm)
-
-	};
-}
 
 function highlightFeature(e) {
 	var layer = e.target;
