@@ -63,7 +63,7 @@ var baseLayers = {
 };
 
 // Add baseLayers to the map
-geojson = L.geoJson(pests, {
+geojson = L.geoJson(states, {
 	style: style,
 	onEachFeature: onEachFeature
 }).addTo(map);
