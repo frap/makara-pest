@@ -7,7 +7,7 @@ var map = L.map('map', {
 });
 
 // Set the position and zoom level of the map for Makara Peak
-map.setView([-41.291046, 174.711845], 19);
+map.setView([-41.291046, 174.711845], 16);
 
 var makara = L.marker([ -41.28840228959656, 174.70725274159147],
   {alt: 'Makara Peak'}).addTo(map)
@@ -62,7 +62,33 @@ var baseLayers = {
     "Statem Terrain": statem_TerrainBackground
 };
 
+// Add baseLayers to the map
+geojson = L.geoJson(pests, {
+	style: style,
+	onEachFeature: onEachFeature
+}).addTo(map);
+
+var overLayers = {
+	"Leafy Pests":geojson
+}
+
 // add the layer to the map
 //map.addLayer(cycle_OSM);
 
-L.control.layers(baseLayers).addTo(map);
+L.control.layers(baseLayers, overlayers).addTo(map);
+
+// Create control that shows information on hover
+var info = L.control({position:'topright'});
+
+info.onAdd = function (map) {
+	this._div = L.DomUtil.create('div', 'info');
+	this.update();
+	return this._div;
+};
+
+info.update = function (props) {
+		this._div.innerHTML = '<p><b>Pest</b></p>' +  (props ?
+			'<b>' + props.species + '</b><br />' + props.size_of_infestation_sqm + ' m<sup>2</sup>'
+			: 'Hover over a pest');
+};
+info.addTo(map);
