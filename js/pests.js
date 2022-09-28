@@ -59,7 +59,7 @@ var baseLayers = {
 	  "ESRI National Geographic": esri_NatGeoWorldMap,
     "Cycle OSM": cycle_OSM,
     "ThunderForest Cycle": thunderforest_OpenCycleMap,
-    "Statem Terrain": statem_TerrainBackground
+    "Statem Terrain": stamen_TerrainBackground
 };
 
 // Add baseLayers to the map
