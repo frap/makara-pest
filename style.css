@@ -1,12 +1,10 @@
 html,
-body {
+body, #map {
   padding: 0;
   margin: 0 auto;
   height: 100%;
   width: 100%;
 }
-
-#map { height: 380px; }
 
 h3 {
   margin: 0;
