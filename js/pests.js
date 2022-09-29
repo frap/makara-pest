@@ -76,7 +76,7 @@ function getColor(d) {
 /* Set of function for the hover over the geojson layer */
 function style(feature) {
 	  return {
-        radius: feature.properties.size_of_infestation_sqm
+    //radius: feature.properties.size_of_infestation_sqm
 		weight: 2,
 		opacity: 0.7,
 		color: 'white',
@@ -97,6 +97,7 @@ geojson = L.geoJSON(states, {
         return L.circleMarker(latlng, style);
     }
 }).addTo(map);
+
 var overLayers = {
 	"Leafy Pests":geojson
 }
@@ -160,26 +161,26 @@ function onEachFeature(feature, layer) {
 }
 
 
-var legend = L.control({position: 'bottomright'});
+// var legend = L.control({position: 'bottomright'});
 
-legend.onAdd = function (map) {
+// legend.onAdd = function (map) {
 
-	var div = L.DomUtil.create('div', 'info legend'),
-		grades = [1, 9, 19, 30, 50, 100],
-		labels = [],
-		from, to;
+// 	var div = L.DomUtil.create('div', 'info legend'),
+// 		grades = [1, 9, 19, 30, 50, 100],
+// 		labels = [],
+// 		from, to;
 
-	for (var i = 0; i < grades.length; i++) {
-		from = grades[i];
-		to = grades[i + 1];
+// 	for (var i = 0; i < grades.length; i++) {
+// 		from = grades[i];
+// 		to = grades[i + 1];
 
-		labels.push(
-			'<i style="background:' + getColor(from + 1) + '"></i> ' +
-			from + (to ? '&ndash;' + to : '+'));
-	}
+// 		labels.push(
+// 			'<i style="background:' + getColor(from + 1) + '"></i> ' +
+// 			from + (to ? '&ndash;' + to : '+'));
+// 	}
 
-	div.innerHTML = labels.join('<br>');
-	return div;
-};
+// 	div.innerHTML = labels.join('<br>');
+// 	return div;
+// };
 
-legend.addTo(map);
+// legend.addTo(map);
