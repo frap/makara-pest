@@ -9,10 +9,6 @@ var map = L.map('map', {
 // Set the position and zoom level of the map for Makara Peak
 map.setView([-41.291046, 174.711845], 16);
 
-var makara = L.marker([ -41.28840228959656, 174.70725274159147],
-  {alt: 'Makara Peak'}).addTo(map)
-    .bindPopup('Makara Peak, the start of all the fun!');
-
 /* Base Layers */
 var esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -52,15 +48,19 @@ var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 	ext: 'png'
 });
 
-// Create base layers group object
-var baseLayers = {
-	  "ESRI World Imagery": esri_WorldImagery,
-	  "ESRI World Terrain": esri_WorldTerrain,
-	  "ESRI National Geographic": esri_NatGeoWorldMap,
-    "Cycle OSM": cycle_OSM,
-    "ThunderForest Cycle": thunderforest_OpenCycleMap,
-    "Statem Terrain": stamen_TerrainBackground
-};
+// // Create base layers group object
+// var baseLayers = {
+// 	  "ESRI World Imagery": esri_WorldImagery,
+// 	  "ESRI World Terrain": esri_WorldTerrain,
+// 	  "ESRI National Geographic": esri_NatGeoWorldMap,
+//     "Cycle OSM": cycle_OSM,
+//     "ThunderForest Cycle": thunderforest_OpenCycleMap,
+//     "Statem Terrain": stamen_TerrainBackground
+// };
+
+// add the layer to the map
+map.addLayer(cycle_OSM);
+
 
 function getColor(d) {
 	return d > 99 ? '#0868ac' :
@@ -74,15 +74,15 @@ function getColor(d) {
 
 
 /* Set of function for the hover over the geojson layer */
-function style(feature) {
+function pest_style(feature) {
 	  return {
-    //radius: feature.properties.size_of_infestation_sqm
+        radius: (feature.properties.infestation_sqm)
 		weight: 2,
 		opacity: 0.7,
 		color: 'white',
 		dashArray: '2',
 		fillOpacity: 0.7,
-		fillColor: getColor(feature.properties.size_of_infestation_sqm)
+		fillColor: getColor(feature.properties.infestation_sqm)
 
 	};
 }
@@ -94,18 +94,16 @@ function style(feature) {
 
 geojson = L.geoJSON(states, {
     pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, style);
+        return L.circleMarker(latlng, pest_style);
     }
 }).addTo(map);
 
-var overLayers = {
-	"Leafy Pests":geojson
-}
+// var overLayers = {
+// 	"Leafy Pests":geojson
+// }
 
-// add the layer to the map
-//map.addLayer(cycle_OSM);
 
-L.control.layers(baseLayers, overlayers).addTo(map);
+// L.control.layers(baseLayers, overlayers).addTo(map);
 
 // Create control that shows information on hover
 var info = L.control({position:'topright'});
@@ -118,47 +116,47 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
 		this._div.innerHTML = '<p><b>Pest</b></p>' +  (props ?
-			'<b>' + props.species + '</b><br />' + props.size_of_infestation_sqm + ' m<sup>2</sup> '
-			+ props.notes_and_recommendations : 'Hover over a pest');
+			'<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> '
+			+ props.notes : 'Hover over a pest');
 };
 info.addTo(map);
 
 
-function highlightFeature(e) {
-	var layer = e.target;
+// function highlightFeature(e) {
+// 	var layer = e.target;
 
-	layer.setStyle({
-		weight: 5,
-		color: '#277FCA',
-		dashArray: '',
-		fillOpacity: 0.7
-	});
+// 	layer.setStyle({
+// 		weight: 5,
+// 		color: '#277FCA',
+// 		dashArray: '',
+// 		fillOpacity: 0.7
+// 	});
 
-	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-		layer.bringToFront();
-	}
+// 	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+// 		layer.bringToFront();
+// 	}
 
-	info.update(layer.feature.properties);
-}
+// 	info.update(layer.feature.properties);
+// }
 
-var geojson;
+// var geojson;
 
-function resetHighlight(e) {
-	geojson.resetStyle(e.target);
-	info.update();
-}
+// function resetHighlight(e) {
+// 	geojson.resetStyle(e.target);
+// 	info.update();
+// }
 
-function zoomToFeature(e) {
-	map.fitBounds(e.target.getBounds());
-}
+// function zoomToFeature(e) {
+// 	map.fitBounds(e.target.getBounds());
+// }
 
-function onEachFeature(feature, layer) {
-	layer.on({
-		mouseover: highlightFeature,
-		mouseout: resetHighlight,
-		click: zoomToFeature
-	});
-}
+// function onEachFeature(feature, layer) {
+// 	layer.on({
+// 		mouseover: highlightFeature,
+// 		mouseout: resetHighlight,
+// 		click: zoomToFeature
+// 	});
+// }
 
 
 // var legend = L.control({position: 'bottomright'});
