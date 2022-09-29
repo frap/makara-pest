@@ -1,0 +1,453 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70927,-41.29127 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":1,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70724,-41.29006 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":1,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71199,-41.28446 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":1,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70777,-41.29067 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":2,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70194,-41.29249 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":2,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":"Conformed ranger point"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70989,-41.28476 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":2,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.72134,-41.29667 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":3,
+    "status":"Spotted",
+    "survey_date":"18/03/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71175,-41.28424 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":3,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70579,-41.29474 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":5,
+    "status":"Spotted",
+    "survey_date":"17/03/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71064,-41.29194 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":5,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71301,-41.29455 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":6,
+    "status":"Spotted",
+    "survey_date":"5/04/2022",
+    "removed_date":"",
+    "notes":"Macrocarpa below Sally Alley"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70386,-41.28975 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":10,
+    "status":"Spotted",
+    "survey_date":"17/03/2022",
+    "removed_date":"",
+    "notes":"2 individuals"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70977,-41.29037 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":10,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71276,-41.29108 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":10,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70165,-41.30735 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Juvenile",
+    "infestation_sqm":10,
+    "status":"Spotted",
+    "survey_date":"16/05/2022",
+    "removed_date":"",
+    "notes":"Two young trees"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71066,-41.28898 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":20,
+    "status":"Spotted",
+    "survey_date":"14/03/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70547,-41.28886 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":20,
+    "status":"Spotted",
+    "survey_date":"17/03/2022",
+    "removed_date":"",
+    "notes":"4 individuals above private property road"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71691,-41.2914 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":20,
+    "status":"Spotted",
+    "survey_date":"7/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.70947,-41.28943 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":20,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7021,-41.30695 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":20,
+    "status":"Spotted",
+    "survey_date":"16/05/2022",
+    "removed_date":"",
+    "notes":"Two trees"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.72069,-41.3009 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":30,
+    "status":"Spotted",
+    "survey_date":"21/03/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71656,-41.2913 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":30,
+    "status":"Spotted",
+    "survey_date":"7/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.7131,-41.29531 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":50,
+    "status":"Spotted",
+    "survey_date":"18/03/2022",
+    "removed_date":"",
+    "notes":"4 large Macrocarpa"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71426,-41.29167 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":50,
+    "status":"Spotted",
+    "survey_date":"20/04/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71754,-41.28921 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":50,
+    "status":"Spotted",
+    "survey_date":"16/05/2022",
+    "removed_date":"",
+    "notes":""
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71231,-41.29557 ]
+    },
+    "properties": {
+    "species":"Wilding Pines and Confiers",
+    "life_stage":"Mature",
+    "infestation_sqm":300,
+    "status":"Spotted",
+    "survey_date":"5/04/2022",
+    "removed_date":"",
+    "notes":"In gully, several very large trees"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71725,-41.28963 ]
+    },
+    "properties": {
+    "species":"Wattle spp.",
+    "life_stage":"Mature",
+    "infestation_sqm":100,
+    "status":"Spotted",
+    "survey_date":"14/03/2022",
+    "removed_date":"",
+    "notes":"Known area of wattle plantings"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 174.71725,-41.29586 ]
+    },
+    "properties": {
+    "species":"Tradescantia",
+    "life_stage":"Mature",
+    "infestation_sqm":1,
+    "status":"Controlled",
+    "survey_date":"18/03/2022",
+    "removed_date":"18/03/2022",
+    "notes":""
+    }
+  }
+]
+}
