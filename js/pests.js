@@ -29,11 +29,6 @@ var cycle_OSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{
 	attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-var open_TopoMap = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
-	maxZoom: 17,
-	attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-});
-
 var thunderforest_OpenCycleMap = L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={apikey}', {
 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 	apikey: '14d1c23f2adc41828d0519f830365211',
@@ -61,6 +56,15 @@ var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 // add the layer to the map
 map.addLayer(cycle_OSM);
 
+function getRadius(d) {
+	return d > 99 ? 20 :
+			d > 49  ? 12 :
+			d > 29  ? 10 :
+			d > 19   ? 7 :
+			d > 9   ? 4 :
+			d > 3   ? 2 :
+						2;
+}
 
 function getColor(d) {
 	return d > 99 ? '#0868ac' :
@@ -76,7 +80,7 @@ function getColor(d) {
 /* Set of function for the hover over the geojson layer */
 function pest_style(feature) {
 	  return {
-    radius: 8, //(feature.properties.infestation_sqm),
+    radius: getRadius(feature.properties.infestation_sqm),
 		weight: 2,
 		opacity: 0.7,
 		color: 'white',
@@ -122,63 +126,63 @@ info.update = function (props) {
 info.addTo(map);
 
 
-// function highlightFeature(e) {
-// 	var layer = e.target;
+function highlightFeature(e) {
+	var layer = e.target;
 
-// 	layer.setStyle({
-// 		weight: 5,
-// 		color: '#277FCA',
-// 		dashArray: '',
-// 		fillOpacity: 0.7
-// 	});
+	layer.setStyle({
+		weight: 5,
+		color: '#277FCA',
+		dashArray: '',
+		fillOpacity: 0.7
+	});
 
-// 	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-// 		layer.bringToFront();
-// 	}
+	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+		layer.bringToFront();
+	}
 
-// 	info.update(layer.feature.properties);
-// }
+	info.update(layer.feature.properties);
+}
 
-// var geojson;
+var geojson;
 
-// function resetHighlight(e) {
-// 	geojson.resetStyle(e.target);
-// 	info.update();
-// }
+function resetHighlight(e) {
+	geojson.resetStyle(e.target);
+	info.update();
+}
 
-// function zoomToFeature(e) {
-// 	map.fitBounds(e.target.getBounds());
-// }
+function zoomToFeature(e) {
+	map.fitBounds(e.target.getBounds());
+}
 
-// function onEachFeature(feature, layer) {
-// 	layer.on({
-// 		mouseover: highlightFeature,
-// 		mouseout: resetHighlight,
-// 		click: zoomToFeature
-// 	});
-// }
+function onEachFeature(feature, layer) {
+	layer.on({
+		mouseover: highlightFeature,
+		mouseout: resetHighlight,
+		click: zoomToFeature
+	});
+}
 
 
-// var legend = L.control({position: 'bottomright'});
+var legend = L.control({position: 'bottomright'});
 
-// legend.onAdd = function (map) {
+legend.onAdd = function (map) {
 
-// 	var div = L.DomUtil.create('div', 'info legend'),
-// 		grades = [1, 9, 19, 30, 50, 100],
-// 		labels = [],
-// 		from, to;
+	var div = L.DomUtil.create('div', 'info legend'),
+		grades = [1, 9, 19, 30, 50, 100],
+		labels = [],
+		from, to;
 
-// 	for (var i = 0; i < grades.length; i++) {
-// 		from = grades[i];
-// 		to = grades[i + 1];
+	for (var i = 0; i < grades.length; i++) {
+		from = grades[i];
+		to = grades[i + 1];
 
-// 		labels.push(
-// 			'<i style="background:' + getColor(from + 1) + '"></i> ' +
-// 			from + (to ? '&ndash;' + to : '+'));
-// 	}
+		labels.push(
+			'<i style="background:' + getColor(from + 1) + '"></i> ' +
+			from + (to ? '&ndash;' + to : '+'));
+	}
 
-// 	div.innerHTML = labels.join('<br>');
-// 	return div;
-// };
+	div.innerHTML = labels.join('<br>');
+	return div;
+};
 
-// legend.addTo(map);
+legend.addTo(map);
