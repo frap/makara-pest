@@ -1,6 +1,6 @@
 var pests = {
-   "type": "FeatureCollection",
-   "features": [
+"type": "FeatureCollection",
+"features": [
   {
     "type": "Feature",
     "geometry": {
