@@ -92,7 +92,7 @@ function pest_style(feature) {
 // 	onEachFeature: onEachFeature
 // }).addTo(map);
 
-geojson = L.geoJSON(states, {
+geojson = L.geoJSON(pests, {
     pointToLayer: function (feature, latlng) {
         return L.circleMarker(latlng, pest_style);
     }
