@@ -76,7 +76,7 @@ function getColor(d) {
 /* Set of function for the hover over the geojson layer */
 function pest_style(feature) {
 	  return {
-        radius: (feature.properties.infestation_sqm)
+    radius: (feature.properties.infestation_sqm),
 		weight: 2,
 		opacity: 0.7,
 		color: 'white',
