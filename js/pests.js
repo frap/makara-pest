@@ -6,6 +6,22 @@ var map = L.map('map', {
   scrollWheelZoom: false
 });
 
+// set up leaf icons
+var LeafIcon = L.Icon.extend({
+    options: {
+        shadowUrl: 'data/leaf-shadow.png',
+        iconSize:     [38, 95],
+        shadowSize:   [50, 64],
+        iconAnchor:   [22, 94],
+        shadowAnchor: [4, 62],
+        popupAnchor:  [-3, -76]
+    }
+});
+
+var greenLeaf = new LeafIcon({iconUrl: 'data/leaf-green.png'}),
+    redLeaf = new LeafIcon({iconUrl: 'dataleaf-red.png'}),
+    orangeLeaf = new LeafIcon({iconUrl: 'data/leaf-orange.png'});
+
 // Set the position and zoom level of the map for Makara Peak
 map.setView([-41.291046, 174.711845], 16);
 
@@ -97,8 +113,13 @@ function pest_style(feature) {
 // }).addTo(map);
 
 geojson = L.geoJSON(pests, {
+    style: function(feature) {
+        switch (feature.properties.party) {
+            case 'Wilding Pines and Conifers': return {icon: greenLeaf };
+            case 'Tradescantia':   return {icon: orangeLeaf };
+        }
     pointToLayer: function (feature, latlng) {
-        return L.circleMarker(latlng, pest_style);
+        return L.Marker(latlng, style);
     }
 }).addTo(map);
 
@@ -124,7 +145,6 @@ info.update = function (props) {
 			+ props.notes : 'Hover over a pest');
 };
 info.addTo(map);
-
 
 function highlightFeature(e) {
 	var layer = e.target;
