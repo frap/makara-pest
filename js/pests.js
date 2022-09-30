@@ -117,7 +117,7 @@ geojson = L.geoJSON(pests, {
         switch (feature.properties.party) {
             case 'Wilding Pines and Conifers': return {icon: greenLeaf };
             case 'Tradescantia':   return {icon: orangeLeaf };
-        }
+        };
     pointToLayer: function (feature, latlng) {
         return L.Marker(latlng, style);
     }
