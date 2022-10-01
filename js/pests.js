@@ -59,18 +59,18 @@ var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 	ext: 'png'
 });
 
-// // Create base layers group object
-// var baseLayers = {
-// 	  "ESRI World Imagery": esri_WorldImagery,
-// 	  "ESRI World Terrain": esri_WorldTerrain,
-// 	  "ESRI National Geographic": esri_NatGeoWorldMap,
-//     "Cycle OSM": cycle_OSM,
-//     "ThunderForest Cycle": thunderforest_OpenCycleMap,
-//     "Statem Terrain": stamen_TerrainBackground
-// };
+// Create base layers group object
+var baseLayers = {
+	  "World Imagery": esri_WorldImagery,
+	  "World Terrain": esri_WorldTerrain,
+	  "National Geographic": esri_NatGeoWorldMap,
+    "Cycle OSM": cycle_OSM,
+    "ThunderForest Cycle": thunderforest_OpenCycleMap,
+    "Statem Terrain": stamen_TerrainBackground
+};
 
 // add the layer to the map
-map.addLayer(cycle_OSM);
+// map.addLayer(cycle_OSM);
 
 function getRadius(d) {
 	return d > 99 ? 20 :
@@ -118,17 +118,18 @@ geojson = L.geoJSON(pests, {
             case 'Wilding Pines and Conifers': return {icon: greenLeaf };
             case 'Tradescantia':   return {icon: orangeLeaf };
         };
+        onEachFeature: onEachFeature
     pointToLayer: function (feature, latlng) {
         return L.Marker(latlng, style);
     }
 }).addTo(map);
 
-// var overLayers = {
-// 	"Leafy Pests":geojson
-// }
+var overLayers = {
+	"Leafy Pests":geojson
+}
 
 
-// L.control.layers(baseLayers, overlayers).addTo(map);
+L.control.layers(baseLayers, overlayers).addTo(map);
 
 // Create control that shows information on hover
 var info = L.control({position:'topright'});
@@ -141,7 +142,7 @@ info.onAdd = function (map) {
 
 info.update = function (props) {
 		this._div.innerHTML = '<p><b>Pest</b></p>' +  (props ?
-			'<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> '
+			                                             '<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> : '
 			+ props.notes : 'Hover over a pest');
 };
 info.addTo(map);
@@ -182,6 +183,16 @@ function onEachFeature(feature, layer) {
 	});
 }
 
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("You clicked the map at " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
 
 var legend = L.control({position: 'bottomright'});
 
