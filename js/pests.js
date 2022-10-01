@@ -131,7 +131,7 @@ geojson = L.geoJSON(pests, {
     //     };
     onEachFeature: onEachFeature,
     pointToLayer: function(feature, latlng) {
-        return L.Marker(latlng, pest_style );
+        return L.circleMarker(latlng, pest_style );
     }
 }).addTo(map);
 
