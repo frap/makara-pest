@@ -119,7 +119,7 @@ geojson = L.geoJSON(pests, {
             case 'Tradescantia':   return {icon: orangeLeaf };
         };
         onEachFeature: onEachFeature
-    pointToLayer: function (feature, latlng) {
+    pointToLayer: function(feature, latlng) {
         return L.Marker(latlng, style);
     }
 }).addTo(map);
