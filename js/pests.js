@@ -106,6 +106,16 @@ function pest_style(feature) {
 
 	};
 }
+
+var geojsonMarkerOptions = {
+    radius: 8,
+    fillColor: "#ff7800",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8
+};
+
 // Add baseLayers to the map
 // geojson = L.geoJson(states, {
 // 	style: style,
@@ -113,14 +123,15 @@ function pest_style(feature) {
 // }).addTo(map);
 
 geojson = L.geoJSON(pests, {
-    style: function(feature) {
-        switch (feature.properties.party) {
-            case 'Wilding Pines and Conifers': return {icon: greenLeaf };
-            case 'Tradescantia':   return {icon: orangeLeaf };
-        };
-        onEachFeature: onEachFeature
+    //style: style
+    // function(feature) {
+    //     switch (feature.properties.party) {
+    //         case 'Wilding Pines and Conifers': return {icon: greenLeaf };
+    //         case 'Tradescantia':   return {icon: orangeLeaf };
+    //     };
+    onEachFeature: onEachFeature,
     pointToLayer: function(feature, latlng) {
-        return L.Marker(latlng, style);
+        return L.Marker(latlng, pest_style );
     }
 }).addTo(map);
 
