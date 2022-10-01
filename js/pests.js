@@ -117,28 +117,14 @@ var geojsonMarkerOptions = {
 };
 
 // Add baseLayers to the map
-// geojson = L.geoJson(states, {
-// 	style: style,
-// 	onEachFeature: onEachFeature
-// }).addTo(map);
-
-geojson = L.geoJSON(pests, {
-    //style: style
-    // function(feature) {
-    //     switch (feature.properties.party) {
-    //         case 'Wilding Pines and Conifers': return {icon: greenLeaf };
-    //         case 'Tradescantia':   return {icon: orangeLeaf };
-    //     };
-    onEachFeature: onEachFeature,
-    pointToLayer: function(feature, latlng) {
-        return L.circleMarker(latlng, pest_style );
-    }
+geojson = L.geoJson(pests, {
+	style: style,
+	onEachFeature: onEachFeature
 }).addTo(map);
 
 var overLayers = {
 	"Leafy Pests":geojson
 }
-
 
 L.control.layers(baseLayers, overlayers).addTo(map);
 
@@ -176,6 +162,19 @@ function highlightFeature(e) {
 }
 
 var geojson;
+
+geojson = L.geoJSON(pests, {
+    //style: style
+    // function(feature) {
+    //     switch (feature.properties.party) {
+    //         case 'Wilding Pines and Conifers': return {icon: greenLeaf };
+    //         case 'Tradescantia':   return {icon: orangeLeaf };
+    //     };
+    //onEachFeature: onEachFeature,
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, pest_style );
+    }
+}).addTo(map);
 
 function resetHighlight(e) {
 	geojson.resetStyle(e.target);
