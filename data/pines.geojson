@@ -46,8 +46,8 @@ var pests = {
     "infestation_sqm":1,
     "status":"Spotted",
     "survey_date":"20/04/2022",
-    "removed_date":"",
-    "notes":""
+    "removed_date":"28/09/2022",
+    "notes":"Removed by Gas"
     }
   },
   {
@@ -63,7 +63,7 @@ var pests = {
     "status":"Spotted",
     "survey_date":"20/04/2022",
     "removed_date":"",
-    "notes":""
+    "notes":"What tree is this?"
     }
   },
   {

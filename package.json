@@ -1,0 +1,17 @@
+{
+  "name": "leaflet-tutorial",
+  "version": "0.0.1",
+  "description": "Leaflet tutorial series",
+  "main": "js/pests.js",
+  "scripts": {
+    "start": "beefy js/pests.js:bundle.js --live",
+    "bundle": "browserify js/pests.js -o bundle.js"
+  },
+  "dependencies": {
+    "leaflet": "^1.9.1"
+  },
+  "devDependencies": {
+    "beefy": "^2.1.8",
+    "browserify": "^13.1.1"
+  }
+}

@@ -19,7 +19,7 @@ var LeafIcon = L.Icon.extend({
 });
 
 var greenLeaf = new LeafIcon({iconUrl: 'data/leaf-green.png'}),
-    redLeaf = new LeafIcon({iconUrl: 'dataleaf-red.png'}),
+    redLeaf = new LeafIcon({iconUrl: 'data/leaf-red.png'}),
     orangeLeaf = new LeafIcon({iconUrl: 'data/leaf-orange.png'});
 
 // Set the position and zoom level of the map for Makara Peak
@@ -69,59 +69,12 @@ var baseLayers = {
     "Statem Terrain": stamen_TerrainBackground
 };
 
-// add the layer to the map
-// map.addLayer(cycle_OSM);
-
-function getRadius(d) {
-	return d > 99 ? 20 :
-			d > 49  ? 12 :
-			d > 29  ? 10 :
-			d > 19   ? 7 :
-			d > 9   ? 4 :
-			d > 3   ? 2 :
-						2;
-}
-
-function getColor(d) {
-	return d > 99 ? '#0868ac' :
-			d > 49  ? '#2f8ec0' :
-			d > 29  ? '#55b0c8' :
-			d > 19   ? '#7bccc4' :
-			d > 9   ? '#a5dcbe' :
-			d > 3   ? '#ccebca' :
-						'#ccebca';
-}
-
-
-/* Set of function for the hover over the geojson layer */
-function pest_style(feature) {
-	  return {
-    radius: getRadius(feature.properties.infestation_sqm),
-		weight: 2,
-		opacity: 0.7,
-		color: 'white',
-		dashArray: '2',
-		fillOpacity: 0.7,
-		fillColor: getColor(feature.properties.infestation_sqm)
-
-	};
-}
-
-var geojsonMarkerOptions = {
-    radius: 8,
-    fillColor: "#ff7800",
-    color: "#000",
-    weight: 1,
-    opacity: 1,
-    fillOpacity: 0.8
-};
-
 // Add baseLayers to the map
 geojson = L.geoJson(pests, {
-	  style: style,
+	//  style: style,
     pointToLayer: function(feature, latlng) {
-        return L.circleMarker(latlng, geojsonMarkerOptions );
-      },
+        return L.circleMarker(latlng, style );
+    },
     onEachFeature: onEachFeature
 }).addTo(map);
 
@@ -129,7 +82,10 @@ var overLayers = {
 	"Leafy Pests":geojson
 }
 
-L.control.layers(baseLayers, overlayers).addTo(map);
+L.control.layers(baseLayers, overLayers).addTo(map);
+
+// add the layer to the map
+// map.addLayer(cycle_OSM);
 
 // Create control that shows information on hover
 var info = L.control({position:'topright'});
@@ -141,18 +97,72 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-		this._div.innerHTML = '<p><b>Pest</b></p>' +  (props ?
+		this._div.innerHTML = '<p><b>Non Native Tree Pests</b></p>' +  (props ?
 			                                             '<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> : '
-			+ props.notes : 'Hover over a pest');
+			+ props.notes : 'Hover Mouse over a Pesty tree ');
 };
 info.addTo(map);
+
+function getIcon(feature) {
+    switch (feature.properties.species) {
+    case 'Wilding Pines and Conifers': return {icon: greenLeaf};
+    case 'Tradescantia':   return {icon: redLeaf };
+    default: return {icon: orangeLeaf}
+    }
+}
+
+function getRadius(d) {
+	return d > 99 ? 20 :
+			d > 49  ? 50 :
+			d > 29  ? 30 :
+			d > 19   ? 20 :
+			d > 9   ? 10 :
+			d > 3   ? 5 :
+						2;
+}
+
+function getColour(d) {
+	return d > 99 ? '#0868ac' :
+			d > 49  ? '#2f8ec0' :
+			d > 29  ? '#55b0c8' :
+			d > 19   ? '#7bccc4' :
+			d > 9   ? '#a5dcbe' :
+			d > 3   ? '#ccebca' :
+						'#ccebca';
+}
+
+
+/* Set of function for the hover over the geojson layer */
+function style(feature) {
+	  return {
+    radius: getRadius(feature.properties.infestation_sqm),
+		weight: 1,
+		opacity: 0.7,
+		color: 'white',
+		dashArray: '2',
+		fillOpacity: 0.7,
+		fillColor: getColour(feature.properties.infestation_sqm)
+
+	};
+}
+
+// var iconOptions = {
+//     icon:    switch (feature.properties.species) {
+//             case 'Wilding Pines and Conifers': return  greenLeaf;
+//         case 'Tradescantia':   return  redLeaf ;
+//         default: return  orangeLeaf ;
+//         }
+//     opacity: 0.8,
+//     fillOpacity: 0.8
+// };
+
 
 function highlightFeature(e) {
 	var layer = e.target;
 
 	layer.setStyle({
 		weight: 5,
-		color: '#277FCA',
+		color: '#2770CA',
 		dashArray: '',
 		fillOpacity: 0.7
 	});
@@ -208,7 +218,7 @@ legend.onAdd = function (map) {
 		to = grades[i + 1];
 
 		labels.push(
-			'<i style="background:' + getColor(from + 1) + '"></i> ' +
+			'<i style="background:' + getColour(from + 1) + '"></i> ' +
 			from + (to ? '&ndash;' + to : '+'));
 	}
 
