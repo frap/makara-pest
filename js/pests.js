@@ -61,17 +61,17 @@ var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 
 // Create base layers group object
 var baseLayers = {
-	  "World Imagery": esri_WorldImagery,
-	  "World Terrain": esri_WorldTerrain,
-	  "National Geographic": esri_NatGeoWorldMap,
+	  "Satellite": esri_WorldImagery,
+//	  "World Terrain": esri_WorldTerrain,
+//	  "National Geographic": esri_NatGeoWorldMap,
     "Cycle OSM": cycle_OSM,
-    "ThunderForest Cycle": thunderforest_OpenCycleMap,
-    "Statem Terrain": stamen_TerrainBackground
+    "ThunderForest Cycle": thunderforest_OpenCycleMap
+  //  "Statem Terrain": stamen_TerrainBackground
 };
 
 // Add baseLayers to the map
 geojson = L.geoJson(pests, {
-	//  style: style,
+    style: style,
     pointToLayer: function(feature, latlng) {
         return L.circleMarker(latlng, style );
     },
@@ -113,22 +113,20 @@ function getIcon(feature) {
 
 function getRadius(d) {
 	return d > 99 ? 20 :
-			d > 49  ? 50 :
-			d > 29  ? 30 :
-			d > 19   ? 20 :
-			d > 9   ? 10 :
-			d > 3   ? 5 :
-						2;
+			d > 49  ? 16 :
+			d > 29  ? 12 :
+			d > 19  ? 8 :
+			d > 9   ? 6 :
+						4;
 }
 
 function getColour(d) {
-	return d > 99 ? '#0868ac' :
-			d > 49  ? '#2f8ec0' :
-			d > 29  ? '#55b0c8' :
-			d > 19   ? '#7bccc4' :
-			d > 9   ? '#a5dcbe' :
-			d > 3   ? '#ccebca' :
-						'#ccebca';
+	return d > 99 ? '#cef9b8' :
+			d > 49  ? '#e9f9b8' :
+			d > 29  ? '#f9eeb8' :
+			d > 19   ? '#f9d3b8' :
+			d > 9   ? '#f9b8b8' :
+						'red';
 }
 
 
@@ -138,7 +136,7 @@ function style(feature) {
     radius: getRadius(feature.properties.infestation_sqm),
 		weight: 1,
 		opacity: 0.7,
-		color: 'white',
+		color: 'black',
 		dashArray: '2',
 		fillOpacity: 0.7,
 		fillColor: getColour(feature.properties.infestation_sqm)
@@ -209,7 +207,7 @@ var legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
 	var div = L.DomUtil.create('div', 'info legend'),
-		grades = [1, 9, 19, 30, 50, 100],
+		grades = [1, 10, 20, 30, 50, 100],
 		labels = [],
 		from, to;
 
