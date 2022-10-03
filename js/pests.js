@@ -23,7 +23,7 @@ var greenLeaf = new LeafIcon({iconUrl: 'data/leaf-green.png'}),
     orangeLeaf = new LeafIcon({iconUrl: 'data/leaf-orange.png'});
 
 // Set the position and zoom level of the map for Makara Peak
-map.setView([-41.291046, 174.711845], 16);
+map.setView([-41.290158, 174.713345], 15);
 
 /* Base Layers */
 var esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
@@ -33,11 +33,6 @@ var esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/
 var esri_WorldTerrain = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
 	maxZoom: 13
-});
-
-var esri_NatGeoWorldMap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}', {
-	attribution: 'Tiles &copy; Esri &mdash; National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC',
-	maxZoom: 16
 });
 
 var cycle_OSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
@@ -63,7 +58,6 @@ var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastl
 var baseLayers = {
 	  "Satellite": esri_WorldImagery,
 //	  "World Terrain": esri_WorldTerrain,
-//	  "National Geographic": esri_NatGeoWorldMap,
     "Cycle OSM": cycle_OSM,
     "ThunderForest Cycle": thunderforest_OpenCycleMap
   //  "Statem Terrain": stamen_TerrainBackground
@@ -97,9 +91,9 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-		this._div.innerHTML = '<p><b>Non Native Tree Pests</b></p>' +  (props ?
+		this._div.innerHTML = '<p><b>Vegetation Pests</b></p>' +  (props ?
 			                                             '<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> : '
-			+ props.notes : 'Hover Mouse over a Pesty tree ');
+			+ props.notes : 'Hover mouse over a Pesty tree ');
 };
 info.addTo(map);
 
