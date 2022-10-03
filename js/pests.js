@@ -22,9 +22,6 @@ var greenLeaf = new LeafIcon({iconUrl: 'data/leaf-green.png'}),
     redLeaf = new LeafIcon({iconUrl: 'data/leaf-red.png'}),
     orangeLeaf = new LeafIcon({iconUrl: 'data/leaf-orange.png'});
 
-// Set the position and zoom level of the map for Makara Peak
-map.setView([-41.290158, 174.713345], 15);
-
 /* Base Layers */
 var esri_WorldImagery = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
@@ -38,21 +35,14 @@ var esri_WorldTerrain = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/
 var cycle_OSM = L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png', {
 	maxZoom: 20,
 	attribution: '<a href="https://github.com/cyclosm/cyclosm-cartocss-style/releases" title="CyclOSM - Open Bicycle render">CyclOSM</a> | Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+});
 
 var thunderforest_OpenCycleMap = L.tileLayer('https://{s}.tile.thunderforest.com/cycle/{z}/{x}/{y}.png?apikey={apikey}', {
 	attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 	apikey: '14d1c23f2adc41828d0519f830365211',
 	maxZoom: 22
-  });
+  }).addTo(map);
 
-var stamen_TerrainBackground = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/terrain-background/{z}/{x}/{y}{r}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-	subdomains: 'abcd',
-	minZoom: 0,
-	maxZoom: 18,
-	ext: 'png'
-});
 
 // Create base layers group object
 var baseLayers = {
@@ -62,6 +52,37 @@ var baseLayers = {
     "ThunderForest Cycle": thunderforest_OpenCycleMap
   //  "Statem Terrain": stamen_TerrainBackground
 };
+
+
+var popup = L.popup();
+
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Coordinates: " + e.latlng.toString())
+        .openOn(map);
+}
+
+map.on('click', onMapClick);
+
+function onLocationFound(e) {
+    var radius = e.accuracy;
+
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("You are within " + radius + " meters from this point").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+}
+
+function setmakaracenter(e) {
+    map.setView([-41.290158, 174.713345], 15);
+}
+
+map.on('locationfound', onLocationFound);
+map.on('locationerror', setmakaracenter);
+
+// Set the position and zoom level of the map for Makara Peak
+map.locate({setView: true, maxZoom: 22});
 
 // Add baseLayers to the map
 var pine_pests = L.geoJson(pests, {
@@ -233,17 +254,6 @@ function onEachFeature(feature, layer) {
 	click: zoomToFeature
     });
 }
-
-var popup = L.popup();
-
-function onMapClick(e) {
-    popup
-        .setLatLng(e.latlng)
-        .setContent("Coordinates: " + e.latlng.toString())
-        .openOn(map);
-}
-
-map.on('click', onMapClick);
 
 var legend = L.control({position: 'bottomright'});
 
