@@ -92,8 +92,9 @@ var pine_pests = L.geoJson(pests, {
     },
     onEachFeature: onEachFeature,
     filter: function(feature) {
-	let species = feature.properties.species;
-	return species.includes("Conifers");
+	let species = feature.properties.species,
+	    notculled = feature.properties.removed_date.trim().length === 0;
+	return species.includes("Conifers")  && notculled;
     }
 }).addTo(map);
 
@@ -116,8 +117,9 @@ var tradescantia_pests = L.geoJson(pests, {
     },
     onEachFeature: onEachFeature,
     filter: function(feature) {
-	let species = feature.properties.species;
-	return species.includes("Trades");
+	let species = feature.properties.species,
+	    notculled = feature.properties.removed_date.trim().length === 0;
+	return species.includes("Trades") && notculled;
     }
 });
 
