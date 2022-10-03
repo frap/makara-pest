@@ -64,20 +64,89 @@ var baseLayers = {
 };
 
 // Add baseLayers to the map
-geojson = L.geoJson(pests, {
-    style: style,
+var pine_pests = L.geoJson(pests, {
+    style: circle_style,
     pointToLayer: function(feature, latlng) {
-        return L.circleMarker(latlng, style );
+        return L.circleMarker(latlng, circle_style );
     },
-    onEachFeature: onEachFeature
+    onEachFeature: onEachFeature,
+    filter: function(feature) {
+	let species = feature.properties.species;
+	return species.includes("Conifers");
+    }
 }).addTo(map);
 
+var cherry_pests = L.geoJson(pests, {
+    style: circle_style,
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, circle_style );
+    },
+    onEachFeature: onEachFeature,
+    filter: function(feature) {
+	let species = feature.properties.species;
+	return species.includes("Cherry");
+    }
+});
+
+var tradescantia_pests = L.geoJson(pests, {
+    style: circle_style,
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, circle_style );
+    },
+    onEachFeature: onEachFeature,
+    filter: function(feature) {
+	let species = feature.properties.species;
+	return species.includes("Trades");
+    }
+});
+
+var honeysuckle_pests = L.geoJson(pests, {
+    style: circle_style,
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, circle_style );
+    },
+    onEachFeature: onEachFeature,
+    filter: function(feature) {
+	let species = feature.properties.species;
+	return species.includes("Honeysuck");
+    }
+});
+
+var africanmoss_pests = L.geoJson(pests, {
+    style: circle_style,
+    pointToLayer: function(feature, latlng) {
+        return L.circleMarker(latlng, circle_style );
+    },
+    onEachFeature: onEachFeature,
+    filter: function(feature) {
+	let species = feature.properties.species;
+	return species.includes("African");
+    }
+});
+
+var culled_pests = L.geoJson(pests, {
+   pointToLayer:  function(feature, latlng) {
+       return L.marker(latlng, {icon: redLeaf} );
+   },
+  //  onEachFeature: onEachFeature,
+    filter: function(feature) {
+	return (feature.properties.removed_date.trim().length !== 0); //null or '' is false
+    }
+});
+
 var overLayers = {
-	"Leafy Pests":geojson
+    "Pine/Confier Pests":pine_pests,
+    "Cherry Tree Pests":cherry_pests,
+    "Tradescantia Pests":tradescantia_pests,
+    "Honeysuckle Pests":honeysuckle_pests,
+    "African Club Moss":africanmoss_pests
 }
 
-L.control.layers(baseLayers, overLayers).addTo(map);
+var layerControl = L.control.layers(baseLayers, overLayers).addTo(map);
 
+var culled = L.layerGroup([ culled_pests]);
+
+layerControl.addOverlay(culled, "Culled Vegetation");
 // add the layer to the map
 // map.addLayer(cycle_OSM);
 
@@ -91,98 +160,78 @@ info.onAdd = function (map) {
 };
 
 info.update = function (props) {
-		this._div.innerHTML = '<p><b>Vegetation Pests</b></p>' +  (props ?
-			                                             '<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> : '
+    this._div.innerHTML = '<p><b>Makara Vegetation Pests</b></p>' +
+	(props ? '<b>' + props.species + '</b><br />' + props.infestation_sqm + ' m<sup>2</sup> : '
 			+ props.notes : 'Hover mouse over a Pesty tree ');
 };
 info.addTo(map);
 
-function getIcon(feature) {
-    switch (feature.properties.species) {
-    case 'Wilding Pines and Conifers': return {icon: greenLeaf};
-    case 'Tradescantia':   return {icon: redLeaf };
-    default: return {icon: orangeLeaf}
-    }
-}
-
 function getRadius(d) {
-	return d > 99 ? 20 :
-			d > 49  ? 16 :
-			d > 29  ? 12 :
-			d > 19  ? 8 :
-			d > 9   ? 6 :
-						4;
+	return d > 99 ? 10 :
+	d > 49  ? 8 :
+	d > 19   ? 6 :
+	4;
 }
 
 function getColour(d) {
 	return d > 99 ? '#cef9b8' :
-			d > 49  ? '#e9f9b8' :
-			d > 29  ? '#f9eeb8' :
-			d > 19   ? '#f9d3b8' :
-			d > 9   ? '#f9b8b8' :
-						'red';
+	d > 49  ? '#e9f9b8' :
+	d > 29  ? '#f9eeb8' :
+	d > 19   ? '#f9d3b8' :
+	d > 9   ? '#f9b8b8' :
+	'red';
 }
 
 
 /* Set of function for the hover over the geojson layer */
-function style(feature) {
-	  return {
-    radius: getRadius(feature.properties.infestation_sqm),
-		weight: 1,
-		opacity: 0.7,
-		color: 'black',
-		dashArray: '2',
-		fillOpacity: 0.7,
-		fillColor: getColour(feature.properties.infestation_sqm)
+function circle_style(feature) {
+    return {
+	radius: getRadius(feature.properties.infestation_sqm),
+	weight: 1,
+	opacity: 0.7,
+	color: 'black',
+	dashArray: '2',
+	fillOpacity: 0.7,
+	fillColor: getColour(feature.properties.infestation_sqm)
 
 	};
 }
 
-// var iconOptions = {
-//     icon:    switch (feature.properties.species) {
-//             case 'Wilding Pines and Conifers': return  greenLeaf;
-//         case 'Tradescantia':   return  redLeaf ;
-//         default: return  orangeLeaf ;
-//         }
-//     opacity: 0.8,
-//     fillOpacity: 0.8
-// };
-
 
 function highlightFeature(e) {
-	var layer = e.target;
+    var layer = e.target;
 
-	layer.setStyle({
-		weight: 5,
-		color: '#2770CA',
-		dashArray: '',
-		fillOpacity: 0.7
-	});
+    layer.setStyle({
+	weight: 5,
+	color: '#2770CA',
+	dashArray: '',
+	fillOpacity: 0.7
+    });
 
-	if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
-		layer.bringToFront();
-	}
+    if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+	layer.bringToFront();
+    }
 
-	info.update(layer.feature.properties);
+    info.update(layer.feature.properties);
 }
 
-var geojson;
+var current_pests;
 
 function resetHighlight(e) {
-	geojson.resetStyle(e.target);
-	info.update();
+    layerControl.resetStyle(e.target);
+    info.update();
 }
 
 function zoomToFeature(e) {
-	map.fitBounds(e.target.getBounds());
+    map.fitBounds(e.target.getBounds());
 }
 
 function onEachFeature(feature, layer) {
-	layer.on({
-		mouseover: highlightFeature,
-		mouseout: resetHighlight,
-		click: zoomToFeature
-	});
+    layer.on({
+	mouseover: highlightFeature,
+	mouseout: resetHighlight,
+	click: zoomToFeature
+    });
 }
 
 var popup = L.popup();
@@ -200,22 +249,22 @@ var legend = L.control({position: 'bottomright'});
 
 legend.onAdd = function (map) {
 
-	var div = L.DomUtil.create('div', 'info legend'),
-		grades = [1, 10, 20, 30, 50, 100],
-		labels = [],
-		from, to;
+    var div = L.DomUtil.create('div', 'info legend'),
+	grades = [1, 10, 20, 30, 50, 100],
+	labels = [],
+	from, to;
 
-	for (var i = 0; i < grades.length; i++) {
-		from = grades[i];
-		to = grades[i + 1];
+    for (var i = 0; i < grades.length; i++) {
+	from = grades[i];
+	to = grades[i + 1];
 
-		labels.push(
-			'<i style="background:' + getColour(from + 1) + '"></i> ' +
-			from + (to ? '&ndash;' + to : '+'));
-	}
+	labels.push(
+	    '<i style="background:' + getColour(from + 1) + '"></i> ' +
+		from + (to ? '&ndash;' + to : '+'));
+    }
 
-	div.innerHTML = labels.join('<br>');
-	return div;
+    div.innerHTML = '<p><b>Area m<sup>2</sup></b></p>' + labels.join('<br>');
+    return div;
 };
 
 legend.addTo(map);
